@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sesión cerrada</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+<nav>
+    <a href="{% url 'login' %}">Iniciar sesión</a>
+    <a href="{% url 'registro' %}">Registrarse</a>
+</nav>
+
+<div class="container">
+    <div class="card" style="text-align:center">
+        <h2>👋 Sesión cerrada</h2>
+        <p>Gracias por visitar nuestro sitio turístico</p>
+        <br>
+        <a href="{% url 'login' %}" class="btn">Volver a iniciar sesión</a>
+    </div>
+</div>
+
+</body>
+</html>

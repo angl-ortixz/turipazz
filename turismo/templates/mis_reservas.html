@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 class="section-title">Mis Reservas</h2>
+
+{% if reservas %}
+    <div class="cards">
+        {% for reserva in reservas %}
+            <div class="card">
+                <h3>{{ reserva.tour.nombre }}</h3>
+                <p><strong>Personas:</strong> {{ reserva.personas }}</p>
+                <p><strong>Precio:</strong> ${{ reserva.tour.precio }}</p>
+                <p class="fecha">📅 {{ reserva.fecha_reserva|date:"d/m/Y H:i" }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p class="empty">Aún no tienes reservas 😢</p>
+{% endif %}
+
+{% endblock %}

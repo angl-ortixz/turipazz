@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 class="titulo-principal">Turipazz</h2>
+
+<!-- ================== SITIOS TURÍSTICOS ================== -->
+<h2>Sitios Turísticos</h2>
+
+{% if user.is_staff %}
+    <a class="btn" href="{% url 'crear_sitio' %}">+ Agregar Sitio</a>
+{% endif %}
+
+<div class="grid">
+{% for sitio in sitios %}
+    <div class="card sitio-card">
+        {% if sitio.imagen %}
+            <img src="{{ sitio.imagen.url }}" alt="{{ sitio.nombre }}">
+        {% endif %}
+
+        <h3>{{ sitio.nombre }}</h3>
+        <p>{{ sitio.descripcion|truncatechars:100 }}</p>
+        <p><b>{{ sitio.ubicacion }}</b></p>
+
+        {% if sitio.precio %}
+            <p class="precio">$ {{ sitio.precio }}</p>
+        {% endif %}
+
+        {% if user.is_staff %}
+            <div class="acciones">
+                <a href="{% url 'editar_sitio' sitio.id %}">✏️</a>
+                <a href="{% url 'eliminar_sitio' sitio.id %}">🗑️</a>
+            </div>
+        {% endif %}
+    </div>
+{% empty %}
+    <p>No hay sitios registrados.</p>
+{% endfor %}
+</div>
+
+<!-- ================== TOURS ================== -->
+<h2 class="subtitulo">Tours Destacados</h2>
+
+<div class="carousel">
+    <div class="carousel-track">
+        {% for tour in tours %}
+        <div class="card tour-card">
+            {% if tour.imagen %}
+                <img src="{{ tour.imagen.url }}" alt="{{ tour.nombre }}">
+            {% endif %}
+
+            <h3>{{ tour.nombre }}</h3>
+            <p>{{ tour.descripcion|truncatechars:120 }}</p>
+            <p class="precio">$ {{ tour.precio }} MXN</p>
+
+            <a href="{% url 'reservar' tour.id %}" class="btn">
+                Reservar
+            </a>
+        </div>
+        {% empty %}
+            <p>No hay tours disponibles.</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

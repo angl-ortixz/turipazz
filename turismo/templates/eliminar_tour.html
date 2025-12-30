@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="form-card">
+<h2>🗑️ Eliminar Tour</h2>
+
+<p>¿Seguro que deseas eliminar <strong>{{ tour.nombre }}</strong>?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button style="background:red;">Sí, eliminar</button>
+    <a href="{% url 'tours' %}">Cancelar</a>
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 class="section-title">📋 Todas las Reservas</h2>
+
+{% if reservas %}
+<table class="tabla-reservas">
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>Tour</th>
+            <th>Personas</th>
+            <th>Precio</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in reservas %}
+        <tr>
+            <td>{{ r.usuario.username }}</td>
+            <td>{{ r.tour.nombre }}</td>
+            <td>{{ r.personas }}</td>
+            <td>${{ r.tour.precio }}</td>
+            <td>{{ r.fecha_reserva|date:"d/m/Y H:i" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p class="empty">No hay reservas aún</p>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Turipazz</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body class="auth-body">
+
+<div class="container auth-container">
+    <h1 class="logo-text">Turipazz</h1>
+    <p class="subtitle">Explora • Reserva • Disfruta</p>
+
+    <form method="post" class="auth-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="btn-primary">
+            Ingresar
+        </button>
+    </form>
+
+    <div class="link">
+        <a href="{% url 'registro' %}">
+            ¿No tienes cuenta? Regístrate
+        </a>
+    </div>
+</div>
+
+</body>
+</html>

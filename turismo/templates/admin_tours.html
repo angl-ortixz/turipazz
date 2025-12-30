@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 class="section-title">🏝️ Gestión de Tours</h2>
+
+<a href="{% url 'crear_tour' %}" class="btn-primary">+ Nuevo Tour</a>
+
+<div class="grid">
+{% for tour in tours %}
+    <div class="card">
+        <img src="{{ tour.imagen.url }}">
+        <h3>{{ tour.nombre }}</h3>
+        <p>${{ tour.precio }}</p>
+
+        <div class="actions">
+            <a href="{% url 'editar_tour' tour.id %}">✏️</a>
+            <a href="{% url 'eliminar_tour' tour.id %}">🗑️</a>
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+    <h2>Reserva Confirmada ✅</h2>
+    <p><strong>Tour:</strong> {{ reserva.tour.nombre }}</p>
+    <p><strong>Fecha:</strong> {{ reserva.fecha }}</p>
+    <p><strong>Personas:</strong> {{ reserva.personas }}</p>
+    <p><strong>Precio:</strong> ${{ reserva.tour.precio }}</p>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Turipazz</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+<nav class="navbar">
+    <!-- IZQUIERDA -->
+    <div class="nav-left">
+        <a class="nav-btn" href="{% url 'inicio' %}">Inicio</a>
+        <a class="nav-btn" href="{% url 'tours' %}">Tours</a>
+      
+        <a href="{% url 'mis_reservas' %}">Mis Reservas</a>
+
+
+        {% if user.is_staff %}
+            <a class="nav-btn" href="{% url 'crear_tour' %}">+ Crear Tour</a>
+        {% endif %}
+      
+    </div>
+
+    <!-- CENTRO -->
+    <div class="nav-center">
+        <h1 class="logo">Turipazz</h1>
+    </div>
+
+    <!-- DERECHA -->
+    <div class="nav-right">
+<a class="nav-btn" href="{% url 'perfil' %}">Mi Perfil</a>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="nav-btn logout-btn">Salir</button>
+        </form>
+    
+    </div>
+</nav>
+
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>

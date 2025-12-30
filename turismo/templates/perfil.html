@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card profile">
+    <h2>Mi Perfil</h2>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Nombre:</strong> {{ user.nombre }}</p>
+    <p><strong>Apellido:</strong> {{ user.apellido }}</p>
+    <p><strong>Teléfono:</strong> {{ user.telefono }}</p>
+</div>
+{% endblock %}
