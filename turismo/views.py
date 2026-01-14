@@ -207,10 +207,12 @@ def eliminar_sitio(request, id):
     sitio = get_object_or_404(SitioTuristico, id=id)
     sitio.delete()
     return redirect('inicio')
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.http import HttpResponseForbidden
 from django.shortcuts import render
+
+User = get_user_model()
 
 @login_required
 def ver_usuarios(request):
@@ -218,7 +220,9 @@ def ver_usuarios(request):
         return HttpResponseForbidden("No autorizado")
 
     usuarios = User.objects.all().order_by("-date_joined")
+
     return render(request, "usuarios/ver_usuarios.html", {
         "usuarios": usuarios
     })
+
 
