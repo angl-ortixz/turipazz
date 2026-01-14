@@ -28,4 +28,6 @@ path('admin-tours/eliminar/<int:id>/', views.eliminar_tour, name='eliminar_tour'
     path('crear-sitio/', views.crear_sitio, name='crear_sitio'),
     path('editar-sitio/<int:id>/', views.editar_sitio, name='editar_sitio'),
     path('eliminar-sitio/<int:id>/', views.eliminar_sitio, name='eliminar_sitio'),
+    path("usuarios/", views.lista_usuarios, name="lista_usuarios"),
 ]
+

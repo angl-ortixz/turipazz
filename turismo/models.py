@@ -83,3 +83,13 @@ class SitioTuristico(models.Model):
 
     def __str__(self):
         return self.nombre
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.shortcuts import render
+
+@login_required
+def lista_usuarios(request):
+    usuarios = User.objects.all()
+    return render(request, "usuarios/lista_usuarios.html", {
+        "usuarios": usuarios
+    })
