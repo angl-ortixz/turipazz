@@ -86,10 +86,15 @@ class SitioTuristico(models.Model):
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render
+from django.http import HttpResponseForbidden
 
 @login_required
 def lista_usuarios(request):
+    if not request.user.is_staff:
+        return HttpResponseForbidden("No autorizado")
+
     usuarios = User.objects.all()
     return render(request, "usuarios/lista_usuarios.html", {
         "usuarios": usuarios
     })
+
