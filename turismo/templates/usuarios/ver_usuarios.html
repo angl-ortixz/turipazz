@@ -6,6 +6,7 @@
 <div class="grid">
     {% for u in usuarios %}
         <div class="card">
+            <p><b>Usuario:</b> {{ u.username }}</p>
             <p><b>Email:</b> {{ u.email }}</p>
             <p><b>Staff:</b> {{ u.is_staff }}</p>
             <p><b>Registro:</b> {{ u.date_joined|date:"d/m/Y" }}</p>

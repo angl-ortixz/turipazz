@@ -3,6 +3,14 @@
 {% block content %}
 
 <h2 class="titulo-principal">Tours Destacados</h2>
+{% if recomendados %}
+<h2>Recomendados para ti</h2>
+<ul>
+  {% for tour in recomendados %}
+    <li>{{ tour.nombre }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
 
 {% if user.is_staff %}
     <a class="btn" href="{% url 'crear_tour' %}">+ Crear Tour</a>

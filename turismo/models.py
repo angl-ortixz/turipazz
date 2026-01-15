@@ -32,21 +32,17 @@ class UsuarioManager(BaseUserManager):
 # =========================
 # MODELO USUARIO PERSONALIZADO
 # =========================
+
 class Usuario(AbstractUser):
-    username = None
     email = models.EmailField(unique=True)
 
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
     telefono = models.CharField(max_length=15, blank=True)
 
-    objects = UsuarioManager()
-
-    USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["nombre", "apellido"]
-
     def __str__(self):
         return self.username
+
 
 
 # =========================
