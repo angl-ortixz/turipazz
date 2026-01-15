@@ -91,15 +91,3 @@ class Reserva(models.Model):
     def __str__(self):
         return f"{self.usuario.email} - {self.tour.nombre}"
 
-class VistaTour(models.Model):
-    usuario = models.ForeignKey(
-        Usuario,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True
-    )
-    tour = models.ForeignKey(Tour, on_delete=models.CASCADE)
-    fecha = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.usuario} - {self.tour}"
