@@ -7,6 +7,12 @@
 {% if user.is_staff %}
     <a class="btn" href="{% url 'crear_tour' %}">+ Crear Tour</a>
 {% endif %}
+{% if recomendados %}
+<h2>Recomendados para ti</h2>
+<ul>
+  {% for tour in recomendados %}
+    <li>{{ tour.nombre }}</li>
+  {% endfor %}
 
 <div class="carousel">
     <div class="carousel-track">
