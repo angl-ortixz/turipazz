@@ -203,4 +203,21 @@ def recomendar_tours(usuario):
     )
 
     return recomendados
+def recomendar_tours(usuario):
+    """
+    IA simple basada en reservas previas
+    """
+    tours_reservados = (
+        Tour.objects
+        .filter(reserva__usuario=usuario)
+        .values('id')
+    )
 
+    recomendados = (
+        Tour.objects
+        .exclude(id__in=tours_reservados)
+        .annotate(total=Count('reserva'))
+        .order_by('-total')[:3]
+    )
+
+    return recomendados
