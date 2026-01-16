@@ -11,7 +11,13 @@
       <h3>{{ tour.nombre }}</h3>
       <p>{{ tour.descripcion|truncatewords:15 }}</p>
       <p><strong>${{ tour.precio }}</strong></p>
+
       <a class="btn" href="{% url 'reservar' tour.id %}">Reservar</a>
+
+      {% if user.is_staff %}
+        <a class="btn btn-edit" href="{% url 'editar_tour' tour.id %}">✏ Editar</a>
+        <a class="btn btn-delete" href="{% url 'eliminar_tour' tour.id %}">🗑 Eliminar</a>
+      {% endif %}
     </div>
   {% endfor %}
 </div>
@@ -27,7 +33,13 @@
       <h3>{{ tour.nombre }}</h3>
       <p>{{ tour.descripcion|truncatewords:15 }}</p>
       <p><strong>${{ tour.precio }}</strong></p>
+
       <a class="btn" href="{% url 'reservar' tour.id %}">Reservar</a>
+
+      {% if user.is_staff %}
+        <a class="btn btn-edit" href="{% url 'editar_tour' tour.id %}">✏ Editar</a>
+        <a class="btn btn-delete" href="{% url 'eliminar_tour' tour.id %}">🗑 Eliminar</a>
+      {% endif %}
     </div>
   {% endfor %}
 </div>
@@ -43,7 +55,13 @@
       <h3>{{ tour.nombre }}</h3>
       <p>{{ tour.descripcion|truncatewords:15 }}</p>
       <p><strong>${{ tour.precio }}</strong></p>
+
       <a class="btn" href="{% url 'reservar' tour.id %}">Reservar</a>
+
+      {% if user.is_staff %}
+        <a class="btn btn-edit" href="{% url 'editar_tour' tour.id %}">✏ Editar</a>
+        <a class="btn btn-delete" href="{% url 'eliminar_tour' tour.id %}">🗑 Eliminar</a>
+      {% endif %}
     </div>
   {% endfor %}
 </div>
@@ -60,7 +78,13 @@
       <h3>{{ tour.nombre }}</h3>
       <p>{{ tour.descripcion }}</p>
       <p><strong>${{ tour.precio }}</strong></p>
+
       <a class="btn" href="{% url 'reservar' tour.id %}">Reservar</a>
+
+      {% if user.is_staff %}
+        <a class="btn btn-edit" href="{% url 'editar_tour' tour.id %}">✏ Editar</a>
+        <a class="btn btn-delete" href="{% url 'eliminar_tour' tour.id %}">🗑 Eliminar</a>
+      {% endif %}
     </div>
   {% endfor %}
 </div>
