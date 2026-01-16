@@ -16,8 +16,7 @@
         <a href="{% url 'mis_reservas' %}" class="nav-btn">Mis Reservas</a>
         {% if user.is_staff %}
             <a href="{% url 'admin_tours' %}" class="nav-btn">Admin Tours</a>
-            <a href="{% url 'todas_reservas' %}" class="nav-btn">Reservas</a>
-            <a href="{% url 'ver_usuarios' %}" class="nav-btn">Usuarios</a>
+          
         {% endif %}
     </div>
 
@@ -27,7 +26,11 @@
 
     <div class="nav-right">
         <a href="{% url 'perfil' %}" class="nav-btn">Perfil</a>
-        <a href="{% url 'logout' %}" class="nav-btn logout">Salir</a>
+       <form method="post" action="{% url 'logout' %}" style="display:inline;">
+  {% csrf_token %}
+  <button type="submit" class="btn">Salir</button>
+</form>
+
     </div>
 </nav>
 
