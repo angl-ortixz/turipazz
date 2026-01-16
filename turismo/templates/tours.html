@@ -1,39 +1,70 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h2>🌟 Tours Destacados</h2>
-<ul>
+<h2 class="titulo-principal">🌟 Tours Destacados</h2>
+<div class="grid">
   {% for tour in destacados %}
-    <li>{{ tour.nombre }} - ${{ tour.precio }}</li>
-  {% empty %}
-    <li>No hay destacados</li>
+    <div class="card">
+      {% if tour.imagen %}
+        <img src="{{ tour.imagen.url }}" alt="{{ tour.nombre }}">
+      {% endif %}
+      <h3>{{ tour.nombre }}</h3>
+      <p>{{ tour.descripcion|truncatewords:15 }}</p>
+      <p><strong>${{ tour.precio }}</strong></p>
+      <a class="btn" href="{% url 'reservar' tour.id %}">Reservar</a>
+    </div>
   {% endfor %}
-</ul>
+</div>
 
 {% if recomendados %}
 <h2>🤖 Recomendados para ti</h2>
-<ul>
+<div class="grid">
   {% for tour in recomendados %}
-    <li>{{ tour.nombre }} - ${{ tour.precio }}</li>
+    <div class="card">
+      {% if tour.imagen %}
+        <img src="{{ tour.imagen.url }}" alt="{{ tour.nombre }}">
+      {% endif %}
+      <h3>{{ tour.nombre }}</h3>
+      <p>{{ tour.descripcion|truncatewords:15 }}</p>
+      <p><strong>${{ tour.precio }}</strong></p>
+      <a class="btn" href="{% url 'reservar' tour.id %}">Reservar</a>
+    </div>
   {% endfor %}
-</ul>
+</div>
 {% endif %}
 
 <h2>📈 Más populares</h2>
-<ul>
+<div class="grid">
   {% for tour in populares %}
-    <li>{{ tour.nombre }} - ${{ tour.precio }}</li>
-  {% empty %}
-    <li>No hay datos aún</li>
+    <div class="card">
+      {% if tour.imagen %}
+        <img src="{{ tour.imagen.url }}" alt="{{ tour.nombre }}">
+      {% endif %}
+      <h3>{{ tour.nombre }}</h3>
+      <p>{{ tour.descripcion|truncatewords:15 }}</p>
+      <p><strong>${{ tour.precio }}</strong></p>
+      <a class="btn" href="{% url 'reservar' tour.id %}">Reservar</a>
+    </div>
   {% endfor %}
-</ul>
+</div>
+
+<hr>
 
 <h2>🗺️ Todos los tours</h2>
-<ul>
+<div class="grid">
   {% for tour in tours %}
-    <li>{{ tour.nombre }} - ${{ tour.precio }}</li>
+    <div class="card">
+      {% if tour.imagen %}
+        <img src="{{ tour.imagen.url }}" alt="{{ tour.nombre }}">
+      {% endif %}
+      <h3>{{ tour.nombre }}</h3>
+      <p>{{ tour.descripcion }}</p>
+      <p><strong>${{ tour.precio }}</strong></p>
+      <a class="btn" href="{% url 'reservar' tour.id %}">Reservar</a>
+    </div>
   {% endfor %}
-</ul>
+</div>
 
 {% endblock %}
+
 
