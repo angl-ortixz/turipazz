@@ -1,52 +1,62 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block content %}
 
 <h2 class="titulo-principal">Tours Destacados</h2>
 
+{% if destacados %}
+<ul class="lista-tours">
+  {% for tour in destacados %}
+    <li class="tour-card">
+      <h3>{{ tour.nombre }}</h3>
+      <p>{{ tour.descripcion }}</p>
+      <p><strong>${{ tour.precio }}</strong></p>
+
+      {% if tour.imagen %}
+        <img src="{{ tour.imagen.url }}" width="200">
+      {% endif %}
+
+      <a class="btn" href="{% url 'reservar' tour.id %}">Reservar</a>
+
+      {% if user.is_staff %}
+        <a class="btn" href="{% url 'editar_tour' tour.id %}">Editar</a>
+        <a class="btn" href="{% url 'eliminar_tour' tour.id %}">Eliminar</a>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No hay tours destacados.</p>
 {% endif %}
+
+
+<h2 class="titulo-principal">Todos los Tours</h2>
+
+<ul class="lista-tours">
+  {% for tour in tours %}
+    <li class="tour-card">
+      <h3>{{ tour.nombre }}</h3>
+      <p>{{ tour.descripcion }}</p>
+      <p><strong>${{ tour.precio }}</strong></p>
+
+      {% if tour.imagen %}
+        <img src="{{ tour.imagen.url }}" width="200">
+      {% endif %}
+
+      <a class="btn" href="{% url 'reservar' tour.id %}">Reservar</a>
+
+      {% if user.is_staff %}
+        <a class="btn" href="{% url 'editar_tour' tour.id %}">Editar</a>
+        <a class="btn" href="{% url 'eliminar_tour' tour.id %}">Eliminar</a>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
+
 
 {% if user.is_staff %}
-    <a class="btn" href="{% url 'crear_tour' %}">+ Crear Tour</a>
+  <a class="btn btn-crear" href="{% url 'crear_tour' %}">+ Crear Tour</a>
 {% endif %}
-{% if recomendados %}
-<h2>Recomendados para ti</h2>
-  {% for tour in recomendados %}
-    <li>{{ tour.nombre }}</li>
-  {% endfor %}
-
-<div class="carousel">
-    <div class="carousel-track">
-
-        {% for tour in tours %}
-        <div class="card tour-card">
-
-            {% if tour.imagen %}
-                <img src="{{ tour.imagen.url }}" alt="{{ tour.nombre }}">
-            {% endif %}
-
-            <h3>{{ tour.nombre }}</h3>
-            <p>{{ tour.descripcion|truncatechars:120 }}</p>
-
-            <p class="precio">$ {{ tour.precio }} MXN</p>
-
-            <a class="btn" href="{% url 'reservar' tour.id %}">
-                Reservar
-            </a>
-
-            {% if user.is_staff %}
-            <div class="acciones">
-                <a href="{% url 'editar_tour' tour.id %}">✏️</a>
-                <a href="{% url 'eliminar_tour' tour.id %}">🗑️</a>
-            </div>
-            {% endif %}
-
-        </div>
-        {% empty %}
-            <p>No hay tours disponibles.</p>
-        {% endfor %}
-
-    </div>
-</div>
 
 {% endblock %}
+
