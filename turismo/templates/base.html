@@ -1,40 +1,33 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
     <title>Turipazz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
 
 <nav class="navbar">
-    <!-- IZQUIERDA -->
     <div class="nav-left">
-        <a class="nav-btn" href="{% url 'inicio' %}">Inicio</a>
-        <a class="nav-btn" href="{% url 'tours' %}">Tours</a>
-      
-        <a href="{% url 'mis_reservas' %}">Mis Reservas</a>
-
-
+        <a href="{% url 'inicio' %}" class="nav-btn">Inicio</a>
+        <a href="{% url 'tours' %}" class="nav-btn">Tours</a>
+        <a href="{% url 'mis_reservas' %}" class="nav-btn">Mis Reservas</a>
         {% if user.is_staff %}
-            <a class="nav-btn" href="{% url 'crear_tour' %}">+ Crear Tour</a>
+            <a href="{% url 'admin_tours' %}" class="nav-btn">Admin Tours</a>
+            <a href="{% url 'todas_reservas' %}" class="nav-btn">Reservas</a>
+            <a href="{% url 'ver_usuarios' %}" class="nav-btn">Usuarios</a>
         {% endif %}
- 
     </div>
 
-    <!-- CENTRO -->
     <div class="nav-center">
         <h1 class="logo">Turipazz</h1>
     </div>
 
-    <!-- DERECHA -->
     <div class="nav-right">
-<a class="nav-btn" href="{% url 'perfil' %}">Mi Perfil</a>
-        <form method="post" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button type="submit" class="nav-btn logout-btn">Salir</button>
-        </form>
-    
+        <a href="{% url 'perfil' %}" class="nav-btn">Perfil</a>
+        <a href="{% url 'logout' %}" class="nav-btn logout">Salir</a>
     </div>
 </nav>
 
