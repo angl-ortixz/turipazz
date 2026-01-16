@@ -185,6 +185,16 @@ def todas_las_reservas(request):
 
 
 # -------------------------
+# CONFIRMACIÓN DE RESERVA
+# -------------------------
+
+@login_required
+def confirmacion(request, reserva_id):
+    reserva = get_object_or_404(Reserva, id=reserva_id)
+    return render(request, 'confirmacion.html', {'reserva': reserva})
+
+
+# -------------------------
 # USUARIOS (ADMIN)
 # -------------------------
 
@@ -194,4 +204,3 @@ User = get_user_model()
 def ver_usuarios(request):
     usuarios = User.objects.all().order_by('-date_joined')
     return render(request, 'usuarios/ver_usuarios.html', {'usuarios': usuarios})
-

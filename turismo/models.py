@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.conf import settings
 
 
 class UsuarioManager(BaseUserManager):
@@ -9,12 +10,13 @@ class UsuarioManager(BaseUserManager):
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
-        user.save()
+        user.save(using=self._db)
         return user
 
     def create_superuser(self, email, password=None, **extra_fields):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
+        extra_fields.setdefault("is_active", True)
         return self.create_user(email, password, **extra_fields)
 
 
@@ -59,12 +61,10 @@ class Tour(models.Model):
 
 
 class Reserva(models.Model):
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     tour = models.ForeignKey(Tour, on_delete=models.CASCADE)
     fecha_reserva = models.DateTimeField(auto_now_add=True)
     personas = models.PositiveIntegerField()
 
     def __str__(self):
         return f"{self.usuario.email} - {self.tour.nombre}"
-
-
