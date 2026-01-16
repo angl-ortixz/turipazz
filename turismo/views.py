@@ -43,14 +43,20 @@ def inicio(request):
 # TOURS
 # -------------------------
 
+from .ia import recomendar_tours
+
 @login_required
 def tours(request):
     tours = Tour.objects.all()
-    destacados = Tour.objects.filter(destacado=True)
+    recomendaciones = recomendar_tours(request.user)
+
     return render(request, 'tours.html', {
         'tours': tours,
-        'destacados': destacados
+        'recomendados': recomendaciones['similares'],
+        'destacados': recomendaciones['destacados'],
+        'populares': recomendaciones['populares'],
     })
+
 
 
 @staff_member_required

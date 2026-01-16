@@ -68,3 +68,12 @@ class Reserva(models.Model):
 
     def __str__(self):
         return f"{self.usuario.email} - {self.tour.nombre}"
+class Reserva(models.Model):
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    tour = models.ForeignKey(Tour, on_delete=models.CASCADE)
+    fecha_reserva = models.DateTimeField(auto_now_add=True)
+    personas = models.PositiveIntegerField()
+    rating = models.PositiveIntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.usuario.email} - {self.tour.nombre}"

@@ -1,62 +1,39 @@
-{% extends "base.html" %}
-
+{% extends 'base.html' %}
 {% block content %}
 
-<h2 class="titulo-principal">Tours Destacados</h2>
-
-{% if destacados %}
-<ul class="lista-tours">
+<h2>🌟 Tours Destacados</h2>
+<ul>
   {% for tour in destacados %}
-    <li class="tour-card">
-      <h3>{{ tour.nombre }}</h3>
-      <p>{{ tour.descripcion }}</p>
-      <p><strong>${{ tour.precio }}</strong></p>
-
-      {% if tour.imagen %}
-        <img src="{{ tour.imagen.url }}" width="200">
-      {% endif %}
-
-      <a class="btn" href="{% url 'reservar' tour.id %}">Reservar</a>
-
-      {% if user.is_staff %}
-        <a class="btn" href="{% url 'editar_tour' tour.id %}">Editar</a>
-        <a class="btn" href="{% url 'eliminar_tour' tour.id %}">Eliminar</a>
-      {% endif %}
-    </li>
+    <li>{{ tour.nombre }} - ${{ tour.precio }}</li>
+  {% empty %}
+    <li>No hay destacados</li>
   {% endfor %}
 </ul>
-{% else %}
-<p>No hay tours destacados.</p>
+
+{% if recomendados %}
+<h2>🤖 Recomendados para ti</h2>
+<ul>
+  {% for tour in recomendados %}
+    <li>{{ tour.nombre }} - ${{ tour.precio }}</li>
+  {% endfor %}
+</ul>
 {% endif %}
 
+<h2>📈 Más populares</h2>
+<ul>
+  {% for tour in populares %}
+    <li>{{ tour.nombre }} - ${{ tour.precio }}</li>
+  {% empty %}
+    <li>No hay datos aún</li>
+  {% endfor %}
+</ul>
 
-<h2 class="titulo-principal">Todos los Tours</h2>
-
-<ul class="lista-tours">
+<h2>🗺️ Todos los tours</h2>
+<ul>
   {% for tour in tours %}
-    <li class="tour-card">
-      <h3>{{ tour.nombre }}</h3>
-      <p>{{ tour.descripcion }}</p>
-      <p><strong>${{ tour.precio }}</strong></p>
-
-      {% if tour.imagen %}
-        <img src="{{ tour.imagen.url }}" width="200">
-      {% endif %}
-
-      <a class="btn" href="{% url 'reservar' tour.id %}">Reservar</a>
-
-      {% if user.is_staff %}
-        <a class="btn" href="{% url 'editar_tour' tour.id %}">Editar</a>
-        <a class="btn" href="{% url 'eliminar_tour' tour.id %}">Eliminar</a>
-      {% endif %}
-    </li>
+    <li>{{ tour.nombre }} - ${{ tour.precio }}</li>
   {% endfor %}
 </ul>
-
-
-{% if user.is_staff %}
-  <a class="btn btn-crear" href="{% url 'crear_tour' %}">+ Crear Tour</a>
-{% endif %}
 
 {% endblock %}
 
